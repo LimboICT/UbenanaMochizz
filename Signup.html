@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Ubenana Mochiz - SignUp</title>
+  <link rel="icon" href="limbus.png" type="image/png" />
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      font-family: "Poppins", sans-serif;
+      background: #ffffff;
+      color: #000000;
+      overflow-x: hidden;
+      opacity: 0;
+      animation: fadeIn 0.3s forwards;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    @keyframes fadeIn { 
+      to { opacity: 1; } 
+    }
+
+    .signup-container {
+      background: white;
+      padding: 35px;
+      border-radius: 15px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+      text-align: center;
+      width: 100%;
+      max-width: 400px;
+      border: 4px solid #680e98;
+    }
+
+    .signup-container h2 {
+      margin-bottom: 25px;
+      font-size: 32px;
+      font-weight: 700;
+      color: #680e98;
+    }
+
+    .signup-container input {
+      width: 100%;
+      padding: 14px;
+      padding-right: 45px;
+      margin: 12px 0;
+      border: 2px solid #680e98;
+      border-radius: 12px;
+      box-sizing: border-box;
+      font-size: 16px;
+      font-family: "Poppins", sans-serif;
+      background-color: #fff;
+    }
+
+    .input-wrapper {
+      position: relative;
+      width: 100%;
+    }
+
+    .toggle-password {
+      position: absolute;
+      top: 50%;
+      right: 15px;
+      transform: translateY(-50%);
+      cursor: pointer;
+      width: 24px;
+      height: 24px;
+      color: #680e98;
+    }
+
+    .toggle-password svg {
+      width: 24px;
+      height: 24px;
+    }
+
+    .signup-container button {
+      width: 100%;
+      padding: 14px;
+      background-color: #ffd21f;
+      color: #000;
+      border: 2px solid #680e98;
+      border-radius: 12px;
+      cursor: pointer;
+      margin-top: 15px;
+      font-size: 18px;
+      font-weight: 600;
+      transition: background-color 0.2s;
+      font-family: "Poppins", sans-serif;
+    }
+
+    .signup-container button:hover {
+      background-color: #680e98;
+      color: #fff;
+    }
+
+    .signup-container .links {
+      margin-top: 20px;
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+    }
+
+    .signup-container a {
+      text-decoration: none;
+      color: #680e98;
+      font-weight: 600;
+      transition: color 0.2s;
+    }
+
+    .signup-container a:hover {
+      color: #ffd21f;
+    }
+
+    .password-match {
+      color: #680e98;
+      font-size: 14px;
+      margin-top: -5px;
+      margin-bottom: 5px;
+      display: none;
+      font-weight: 600;
+      background-color: rgba(255, 210, 31, 0.2);
+      padding: 8px;
+      border-radius: 8px;
+      border: 1px solid #680e98;
+    }
+
+    @media (max-width: 700px) {
+      .signup-container {
+        padding: 25px;
+        margin: 20px;
+      }
+      
+      .signup-container h2 {
+        font-size: 28px;
+      }
+    }
+  </style>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="signup-container">
+    <h2>Sign Up</h2>
+    <input type="text" id="fullname" placeholder="Full Name" required />
+    <input type="email" id="email" placeholder="Email" required />
+
+    <div class="input-wrapper">
+      <input type="password" id="password" placeholder="Password" required />
+      <svg class="toggle-password" onclick="toggleVisibility('password', this)" viewBox="0 0 24 24">
+        <path d="M12 4.5C7.5 4.5 3.7 7.6 2 12c1.7 4.4 5.5 7.5 10 7.5s8.3-3.1 10-7.5c-1.7-4.4-5.5-7.5-10-7.5zm0 13c-3.3 0-6-2.7-6-6s2.7-6 6-6
+        6 2.7 6 6-2.7 6-6 6zm0-10a4 4 0 100 8 4 4 0 000-8z" />
+      </svg>
+    </div>
+
+    <div class="input-wrapper">
+      <input type="password" id="confirm-password" placeholder="Confirm Password" required />
+      <svg class="toggle-password" onclick="toggleVisibility('confirm-password', this)" viewBox="0 0 24 24">
+        <path d="M12 4.5C7.5 4.5 3.7 7.6 2 12c1.7 4.4 5.5 7.5 10 7.5s8.3-3.1 10-7.5c-1.7-4.4-5.5-7.5-10-7.5zm0 13c-3.3 0-6-2.7-6-6s2.7-6 6-6
+        6 2.7 6 6-2.7 6-6 6zm0-10a4 4 0 100 8 4 4 0 000-8z" />
+      </svg>
+    </div>
+
+    <div id="password-error" class="password-match">Passwords do not match</div>
+    <button id="signup-button">Sign Up</button>
+    <div class="links">
+      <a href="Login.html">Already have an account? Log In</a>
+    </div>
+  </div>
+
+  <script type="module" src="signup.js"></script>
+
+  <script>
+    document.addEventListener('gesturestart', function (e) {
+      e.preventDefault();
+    });
+
+    function toggleVisibility(fieldId, icon) {
+      const input = document.getElementById(fieldId);
+      const isPassword = input.type === 'password';
+      input.type = isPassword ? 'text' : 'password';
+
+      icon.innerHTML = isPassword
+        ? `<path d="M12 5c-7 0-10 7-10 7s3 7 10 7 10-7 10-7-3-7-10-7zm0 12c-2.8 0-5.3-1.7-6.6-4 1.3-2.3 3.8-4 6.6-4 2.8 0 5.3 1.7 6.6 4-1.3 2.3-3.8 4-6.6 4zm0-7a3 3 0 100 6 3 3 0 000-6z"/>`
+        : `<path d="M12 4.5C7.5 4.5 3.7 7.6 2 12c1.7 4.4 5.5 7.5 10 7.5s8.3-3.1 10-7.5c-1.7-4.4-5.5-7.5-10-7.5zm0 13c-3.3 0-6-2.7-6-6s2.7-6 6-6
+           6 2.7 6 6-2.7 6-6 6zm0-10a4 4 0 100 8 4 4 0 000-8z"/>`;
+    }
+
+    const passwordInput = document.getElementById('password');
+    const confirmInput = document.getElementById('confirm-password');
+    const errorElement = document.getElementById('password-error');
+
+    function checkPasswordMatch() {
+      const password = passwordInput.value;
+      const confirmPassword = confirmInput.value;
+      if (confirmPassword.length > 0 && password !== confirmPassword) {
+        errorElement.style.display = 'block';
+      } else {
+        errorElement.style.display = 'none';
+      }
+    }
+
+    passwordInput.addEventListener('input', checkPasswordMatch);
+    confirmInput.addEventListener('input', checkPasswordMatch);
+  </script>
+</body>
+</html>

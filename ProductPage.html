@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Ubenana Mochiz - Product</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      font-family: "Poppins", sans-serif;
+      background: #ffffff;
+      color: #000000;
+      overflow-x: hidden;
+      opacity: 0;
+      animation: fadeIn 0.3s forwards;
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+      user-select: none;
+    }
+
+    @keyframes fadeIn { 
+      to { opacity: 1; } 
+    }
+
+    .top-nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      background: #680e98;
+      padding: 25px 14px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 4px solid #ffd21f; 
+      z-index: 50;
+    }
+
+    .nav-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .nav-logo {
+      height: 40px;
+      width: auto;
+      border-radius: 8px;
+    }
+
+    .nav-items {
+      display: flex;
+      gap: 22px;
+      margin-right: 12px;
+    }
+
+    .nav-item {
+      display: flex;
+      flex-direction: column; 
+      align-items: center;
+      gap: 4px; 
+      color: #ffd21f;
+      font-size: 14px;
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .nav-item i {
+      font-size: 22px; 
+      display: block;
+    }
+
+    .nav-item.active { 
+      color: #fff; 
+    }
+
+    .cart-badge {
+      position: absolute;
+      margin-left: 12px;
+      margin-top: -6px;
+      background: #ffd21f;
+      color: #000;
+      border-radius: 10px;
+      padding: 2px 7px;
+      font-size: 11px;
+      font-weight: 700;
+    }
+
+    .app-header {
+      background: transparent;
+      padding: 22px 0;
+      text-align: center;
+      font-size: 50px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      color: #680e98;
+      margin-top: 85px;
+    }
+
+    .app-container {
+      flex: 1;
+      overflow-y: auto;
+      padding-bottom: 80px;
+    }
+
+    .main-content {
+      padding: 18px;
+      max-width: 900px;
+      margin: auto;
+    }
+
+    .product-content {
+      flex: 1;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .product-card {
+      background: white;
+      width: 100%;
+      max-width: 500px;
+      border-radius: 15px;
+      padding: 25px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+      margin-top: 20px;
+      border: 4px solid #680e98;
+    }
+
+    .product-image {
+      width: 100%;
+      height: 320px;
+      object-fit: contain;
+      margin-bottom: 25px;
+      border-radius: 12px;
+      background-color: #fff;
+      border: 4px solid #ffd21f;
+    }
+
+    .product-name {
+      font-size: 28px;
+      font-weight: 700;
+      margin-bottom: 15px;
+      text-align: center;
+      color: #680e98;
+    }
+
+    .product-price {
+      font-size: 24px;
+      font-weight: 600;
+      margin-bottom: 25px;
+      text-align: center;
+      color: #000;
+    }
+
+    .options-section {
+      margin-bottom: 25px;
+    }
+
+    .option-label {
+      display: block;
+      margin-bottom: 10px;
+      font-weight: 600;
+      font-size: 16px;
+      color: #680e98;
+    }
+
+    .option-select {
+      width: 100%;
+      padding: 14px;
+      border: 2px solid #680e98;
+      border-radius: 12px;
+      font-size: 16px;
+      background-color: #fff;
+      font-family: "Poppins", sans-serif;
+    }
+
+    .quantity-control {
+      display: flex;
+      align-items: center;
+      margin-bottom: 25px;
+    }
+
+    .quantity-btn {
+      width: 45px;
+      height: 45px;
+      background-color: #ffd21f;
+      color: #000;
+      border: 2px solid #680e98;
+      border-radius: 12px;
+      font-size: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-weight: 600;
+      transition: background-color 0.2s;
+    }
+
+    .quantity-btn:hover {
+      background-color: #680e98;
+      color: #fff;
+    }
+
+    .quantity-input {
+      flex: 1;
+      text-align: center;
+      font-size: 18px;
+      margin: 0 15px;
+      border: 2px solid #680e98;
+      border-radius: 12px;
+      padding: 10px;
+      font-weight: 600;
+      background: #fff;
+    }
+
+    .add-to-cart-btn {
+      width: 100%;
+      padding: 16px;
+      background-color: #ffd21f;
+      color: #000;
+      border: 4px solid #680e98;
+      border-radius: 15px;
+      font-size: 18px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background-color 0.2s;
+      font-family: "Poppins", sans-serif;
+    }
+
+    .add-to-cart-btn:hover {
+      background-color: #680e98;
+      color: #fff;
+    }
+
+    #dark-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(104, 14, 152, 0.8);
+      z-index: 9998;
+      display: none;
+    }
+
+    #success-popup {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: #680e98;
+      color: #ffd21f;
+      padding: 30px 50px;
+      border-radius: 15px;
+      font-size: 20px;
+      z-index: 9999;
+      text-align: center;
+      font-weight: 700;
+      opacity: 0;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+      border: 4px solid #ffd21f;
+    }
+
+    #success-popup span {
+      font-size: 50px;
+      margin-right: 15px;
+      color: #ffd21f;
+    }
+
+    #success-popup p {
+      margin-top: 15px;
+      font-size: 18px;
+    }
+
+    @keyframes popupIn {
+      0% { opacity: 0; transform: translate(-50%, -50%) scale(0.3); }
+      100% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+    }
+
+    @keyframes popupOut {
+      0% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+      100% { opacity: 0; transform: translate(-50%, -50%) scale(0.3); }
+    }
+
+    #success-popup.show {
+      display: block;
+      animation: popupIn 0.4s ease forwards;
+    }
+
+    #success-popup.hide {
+      animation: popupOut 0.3s ease forwards;
+    }
+
+    @media (max-width: 700px) {
+      .product-content {
+        padding: 15px;
+      }
+      
+      .product-card {
+        padding: 20px;
+      }
+      
+      .product-image {
+        height: 280px;
+      }
+      
+      .product-name {
+        font-size: 24px;
+      }
+      
+      .product-price {
+        font-size: 20px;
+      }
+    }
+
+    @media (max-width: 400px) {
+      .product-image {
+        height: 250px;
+      }
+    }
+  </style>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <nav class="top-nav">
+    <div class="nav-left">
+      <img src="Logo.png" alt="Logo" class="nav-logo">
+    </div>
+    <div class="nav-items">
+      <a href="index.html" class="nav-item">
+        <i class="fas fa-home"></i>
+        <span>Home</span>
+      </a>
+      <a href="cart.html" class="nav-item">
+        <i class="fas fa-shopping-cart"></i>
+        <span>Cart</span>
+        <span class="cart-badge" id="cart-badge-count">0</span>
+      </a>
+      <a href="Contact.html" class="nav-item">
+        <i class="fas fa-headset"></i>
+        <span>Contact</span>
+      </a>
+      <a href="account.html" class="nav-item">
+        <i class="fas fa-user"></i>
+        <span>Account</span>
+      </a>
+    </div>
+  </nav>
+
+  <div class="app-container">
+    <header class="app-header">
+      Product Details
+    </header>
+
+    <main class="product-content">
+      <div class="product-card">
+        <img id="product-image" src="" alt="Product Image" class="product-image">
+        <h1 id="product-name" class="product-name">Product Name</h1>
+        <p id="product-price" class="product-price">₱0.00</p>
+        
+        <div class="options-section" id="color-option">
+          <label class="option-label">Color:</label>
+          <select class="option-select" id="color">
+            <option value="Black">Black</option>
+            <option value="White">White</option>
+            <option value="Gray">Gray</option>
+          </select>
+        </div>
+
+        <div class="options-section" id="size-option">
+          <label class="option-label">Size:</label>
+          <select class="option-select" id="size">
+            <option value="Small">Small</option>
+            <option value="Medium">Medium</option>
+            <option value="Large">Large</option>
+            <option value="XL">XL</option>
+          </select>
+        </div>
+
+        <div class="options-section">
+          <label class="option-label">Quantity:</label>
+          <div class="quantity-control">
+            <button class="quantity-btn" onclick="adjustQuantity(-1)">-</button>
+            <input type="number" id="quantity" class="quantity-input" value="1" min="1">
+            <button class="quantity-btn" onclick="adjustQuantity(1)">+</button>
+          </div>
+        </div>
+
+        <button class="add-to-cart-btn" onclick="addToCart()">Add to Cart</button>
+      </div>
+    </main>
+  </div>
+
+  <div id="dark-overlay"></div>
+  <div id="success-popup"><span>✔</span><p>Success Message</p></div>
+  <audio id="success-sound" src="ding.mp3" preload="auto"></audio>
+
+  <script>
+    window.addEventListener('load', function() {
+      document.body.style.opacity = 1;
+    });
+
+    const params = new URLSearchParams(window.location.search);
+    const name = params.get('name');
+    const price = params.get('price');
+    const image = params.get('image');
+    const hasSize = params.get('hasSize') === 'true';
+    const hasColor = params.get('hasColor') === 'true';
+    const editMode = params.get('edit') === 'true';
+    const itemIndex = params.get('index');
+
+    const color1 = params.get('color1');
+    const color1Image = params.get('color1Image');
+    const color2 = params.get('color2');
+    const color2Image = params.get('color2Image');
+    const color3 = params.get('color3');
+    const color3Image = params.get('color3Image');
+
+    if (name && price && image) {
+      document.getElementById('product-name').textContent = name;
+      document.getElementById('product-price').textContent = `₱${price}`;
+      document.getElementById('product-image').src = image;
+
+      if (!hasColor) document.getElementById('color-option').style.display = 'none';
+      if (!hasSize) document.getElementById('size-option').style.display = 'none';
+
+      if (editMode && itemIndex !== null) {
+        const cart = JSON.parse(localStorage.getItem("cart")) || [];
+        const currentItem = cart[itemIndex];
+        if (currentItem) {
+          document.getElementById('quantity').value = currentItem.quantity || 1;
+          if (hasColor && currentItem.color) document.getElementById('color').value = currentItem.color;
+          if (hasSize && currentItem.size) document.getElementById('size').value = currentItem.size;
+          updatePrice(parseFloat(price), currentItem.quantity);
+          document.querySelector('.add-to-cart-btn').textContent = 'Update Cart';
+        }
+      }
+    }
+
+    function updatePrice(basePrice, quantity) {
+      const updatedPrice = basePrice * quantity;
+      document.getElementById('product-price').textContent = `₱${updatedPrice.toFixed(2)}`;
+    }
+
+    function adjustQuantity(change) {
+      const quantityInput = document.getElementById('quantity');
+      let newQuantity = parseInt(quantityInput.value) + change;
+      if (newQuantity < 1) newQuantity = 1;
+      quantityInput.value = newQuantity;
+      updatePrice(parseFloat(price), newQuantity);
+    }
+
+    document.getElementById('quantity').addEventListener('input', function() {
+      const quantity = parseInt(this.value) || 1;
+      updatePrice(parseFloat(price), quantity);
+    });
+
+    const colorSelect = document.getElementById('color');
+    colorSelect.addEventListener('change', function() {
+      const selectedColor = colorSelect.value;
+      if (selectedColor === "Black" && color1Image) {
+        document.getElementById('product-image').src = color1Image;
+      } else if (selectedColor === "White" && color2Image) {
+        document.getElementById('product-image').src = color2Image;
+      } else if (selectedColor === "Gray" && color3Image) {
+        document.getElementById('product-image').src = color3Image;
+      }
+    });
+
+    function showSuccessPopup(message) {
+      const popup = document.getElementById("success-popup");
+      const overlay = document.getElementById("dark-overlay");
+      const sound = document.getElementById("success-sound");
+
+      overlay.style.display = "block";
+      popup.querySelector("p").textContent = message;
+      popup.classList.remove("hide");
+      popup.classList.add("show");
+      sound.volume = 0.2;
+      sound.currentTime = 0;
+      sound.play();
+
+      setTimeout(() => {
+        popup.classList.remove("show");
+        popup.classList.add("hide");
+        setTimeout(() => {
+          popup.style.display = "none";
+          overlay.style.display = "none";
+        }, 300);
+      }, 2000);
+    }
+
+    function addToCart() {
+      const selectedColor = document.getElementById('color').value;
+      const selectedSize = document.getElementById('size').value;
+      const selectedQuantity = document.getElementById('quantity').value;
+
+      if (hasColor && !selectedColor) return alert("Please select a color.");
+      if (hasSize && !selectedSize) return alert("Please select a size.");
+      if (selectedQuantity < 1) return alert("Please enter a valid quantity.");
+
+      const cartItem = {
+        name,
+        price: parseFloat(price),
+        image: document.getElementById('product-image').src,
+        color: hasColor ? selectedColor : null,
+        size: hasSize ? selectedSize : null,
+        quantity: parseInt(selectedQuantity)
+      };
+
+      const cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+      if (editMode) {
+        cart[itemIndex] = cartItem;
+        showSuccessPopup("Item Updated");
+      } else {
+        cart.push(cartItem);
+        showSuccessPopup("Added to Cart");
+      }
+
+      localStorage.setItem("cart", JSON.stringify(cart));
+
+      setTimeout(() => {
+        window.location.href = "index.html";
+      }, 2000);
+    }
+
+    function fadeOutAndGoBack() {
+      document.body.style.opacity = 0;
+      setTimeout(() => {
+        window.location.href = "index.html"; 
+      }, 300);
+    }
+
+    window.onload = function() {
+      if (document.referrer) {
+        localStorage.setItem("previousPage", document.referrer);
+      }
+
+      if (editMode && hasColor) {
+        colorSelect.dispatchEvent(new Event('change'));
+      }
+    };
+  </script>
+  
+  <script>
+    document.addEventListener('gesturestart', function (e) {
+      e.preventDefault();
+    });
+  </script>
+</body>
+</html>
