@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>Ubenana Mochiz - Checkout</title>
   <link rel="icon" href="Logo.png" type="image/png">
-  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <style>
     * {
       margin: 0;
@@ -478,15 +477,7 @@
       const gcashNumber = selectedPayment === "gcash" ? document.getElementById("gcash-number").value.trim() : null;
 
       if (!fullName || !address || !contactNumber) {
-        Swal.fire({
-          title: "Error",
-          text: "Please complete all required fields",
-          icon: "error",
-          background: "#000",
-          color: "#fff",
-          showConfirmButton: false,
-          timer: 1500
-        });
+        alert("Please complete all required fields");
         return;
       }
 
@@ -504,30 +495,14 @@
       try {
         await addDoc(collection(db, "orders"), orderData);
         
-        Swal.fire({
-          title: "Success!",
-          text: "Your order has been placed",
-          icon: "success",
-          background: "#000",
-          color: "#fff",
-          showConfirmButton: false,
-          timer: 1500
-        });
+        alert("Your order has been placed!");
 
         localStorage.removeItem("cart");
-        setTimeout(() => window.location.href = "index.html", 1500);
+        setTimeout(() => window.location.href = "index.html", 500);
         
       } catch (error) {
         console.error("Error placing order:", error);
-        Swal.fire({
-          title: "Error",
-          text: "Failed to place order. Please try again.",
-          icon: "error",
-          background: "#000",
-          color: "#fff",
-          showConfirmButton: false,
-          timer: 1500
-        });
+        alert("Failed to place order. Please try again.");
       }
     });
 
