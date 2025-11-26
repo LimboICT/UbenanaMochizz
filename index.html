@@ -34,7 +34,6 @@
       to { opacity: 1; } 
     }
 
-    /* Consistent Navigation Bar */
     .top-nav {
       position: fixed;
       top: 0;
@@ -65,6 +64,7 @@
       display: flex;
       gap: 22px;
       margin-right: 12px;
+      align-items: center;
     }
 
     .nav-item {
@@ -97,6 +97,26 @@
       padding: 2px 7px;
       font-size: 11px;
       font-weight: 700;
+    }
+    
+    .auth-elements {
+      display: none;
+    }
+
+    #user-welcome {
+      color: #ffd21f;
+      font-weight: 600;
+      margin-right: 10px;
+    }
+
+    #logout-btn {
+      background: #ffd21f;
+      color: #000;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 8px;
+      font-weight: 600;
+      cursor: pointer;
     }
 
     .app-header {
@@ -367,6 +387,9 @@
       <img src="Logo.png" alt="Logo" class="nav-logo">
     </div>
     <div class="nav-items">
+      <span id="user-welcome" class="auth-elements"></span>
+      <button id="logout-btn" class="auth-elements">Logout</button>
+      
       <a href="index.html" class="nav-item active">
         <i class="fas fa-home"></i>
         <span>Home</span>
@@ -431,8 +454,8 @@
         <h2>Join Our Community</h2>
         <p>Not yet part of the Ubenana Community? Log In or Sign Up to gain more access!</p>
         <div class="auth-buttons" id="auth-buttons">
-          <a href="Login.html" class="auth-btn login-btn">Log In</a>
-          <a href="Signup.html" class="auth-btn signup-btn">Sign Up</a>
+          <a href="Login.html" class="auth-btn login-btn" id="login-btn">Log In</a>
+          <a href="Signup.html" class="auth-btn signup-btn" id="signup-btn">Sign Up</a>
         </div>
       </div>
     </main>
@@ -454,69 +477,31 @@
         });
       });
 
-      startImageSlider();
       startBannerSlider();
-      checkUserAuth();
-      handleLogout();
+      updateCartCount();
     });
-
-    const auth = firebase.auth();
-
-    function checkUserAuth() {
-      firebase.auth().onAuthStateChanged((user) => {
-        const authSection = document.getElementById('auth-section');
-        const authButtons = document.getElementById('auth-buttons');
-        const accountBtn = document.getElementById('account-btn');
-        
-        if (user) {
-          authSection.style.display = 'none';
-          accountBtn.querySelector('span').textContent = user.displayName || 'Account';
-        } else {
-          authSection.style.display = 'block';
-          accountBtn.querySelector('span').textContent = 'Account';
-        }
-      });
-    }
-
-    function startImageSlider() {
-      const categoryImages = document.querySelectorAll('.category-image');
-      
-      setInterval(() => {
-        categoryImages.forEach((image) => {
-          const currentCategory = image.parentElement;
-          const images = currentCategory.querySelectorAll('.category-image');
-          
-          const activeImage = currentCategory.querySelector('.category-image.active');
-          let nextIndex = [...images].indexOf(activeImage) + 1;
-          if (nextIndex === images.length) {
-            nextIndex = 0;
-          }
-
-          images.forEach(img => img.classList.remove('active'));
-          images[nextIndex].classList.add('active');
-        });
-      }, 2000);
-    }
 
     function startBannerSlider() {
       const bannerSlides = document.querySelectorAll('.banner-slide');
-      let currentSlide = 0;
-      
-      setInterval(() => {
-        bannerSlides[currentSlide].classList.remove('active');
-        currentSlide = (currentSlide + 1) % bannerSlides.length;
-        bannerSlides[currentSlide].classList.add('active');
-      }, 5000);
+      if (bannerSlides.length > 0) {
+        let currentSlide = 0;
+        
+        setInterval(() => {
+          bannerSlides[currentSlide].classList.remove('active');
+          currentSlide = (currentSlide + 1) % bannerSlides.length;
+          bannerSlides[currentSlide].classList.add('active');
+        }, 5000);
+      }
     }
 
     function updateCartCount() {
       const cart = JSON.parse(localStorage.getItem('cart')) || [];
       const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
-      document.getElementById('cart-count').textContent = totalItems;
+      const cartCountElement = document.getElementById('cart-count');
+      if (cartCountElement) {
+        cartCountElement.textContent = totalItems;
+      }
     }
-
-    updateCartCount();
   </script>
 </body>
-
 </html>
