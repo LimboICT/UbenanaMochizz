@@ -34,6 +34,7 @@
       to { opacity: 1; } 
     }
 
+    /* Consistent Navigation Bar */
     .top-nav {
       position: fixed;
       top: 0;
@@ -98,27 +99,28 @@
       font-size: 11px;
       font-weight: 700;
     }
-    
-    .auth-elements {
-      display: none;
-    }
 
-    #user-welcome {
-      color: #ffd21f;
-      font-weight: 600;
-      margin-right: 10px;
-    }
-
+    /* Logout button styling */
     #logout-btn {
       background: #ffd21f;
       color: #000;
       border: none;
-      padding: 8px 16px;
-      border-radius: 8px;
-      font-weight: 600;
+      padding: 16px 32px;
+      border-radius: 35px;
+      font-size: 20px;
+      font-weight: 700;
       cursor: pointer;
+      display: none;
+      text-decoration: none;
+      transition: .2s ease;
     }
 
+    #logout-btn:hover {
+      background: #680e98;
+      color: #fff;
+    }
+
+    /* Rest of your existing CSS remains exactly the same */
     .app-header {
       background: transparent;
       padding: 22px 0;
@@ -366,7 +368,8 @@
         font-size: 16px; 
       }
       
-      .auth-btn { 
+      .auth-btn,
+      #logout-btn { 
         font-size: 18px; 
         padding: 14px 28px; 
       }
@@ -387,9 +390,7 @@
       <img src="Logo.png" alt="Logo" class="nav-logo">
     </div>
     <div class="nav-items">
-      <span id="user-welcome" class="auth-elements"></span>
-      <button id="logout-btn" class="auth-elements">Logout</button>
-      
+      <!-- Your existing nav items -->
       <a href="index.html" class="nav-item active">
         <i class="fas fa-home"></i>
         <span>Home</span>
@@ -456,6 +457,7 @@
         <div class="auth-buttons" id="auth-buttons">
           <a href="Login.html" class="auth-btn login-btn" id="login-btn">Log In</a>
           <a href="Signup.html" class="auth-btn signup-btn" id="signup-btn">Sign Up</a>
+          <button id="logout-btn" class="auth-btn">Log Out</button>
         </div>
       </div>
     </main>
